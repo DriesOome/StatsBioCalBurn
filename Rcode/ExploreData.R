@@ -140,3 +140,24 @@ correlation_weight_calories = cor(data$weight, data$calories) # Na values make t
 correlation_calories_calhour = cor(data$calories, data$calhour) # Na values make this command fail
 
 
+
+## ADDED 
+## extra plot: missing % per calhour and weight: totally missing calories on low calhour across weights
+## read data
+dataframe <- read.table('../muscle-incomplete.txt', header = TRUE)
+## create r: 1 if complete, 0 if missing
+dataframe$r<-as.string(!is.na(dataframe$calories))
+head(dataframe,30)
+library(tidyverse)
+
+## scatterplot
+dataframe %>%
+  ggplot(aes(calhour ,weight , color=r)) +
+  geom_point(alpha=0.5, size=5) +
+  labs(y="calhour", x="weight", subtitle="Missing calories by calhour and weight")
+
+## ADDED 
+
+
+
+
